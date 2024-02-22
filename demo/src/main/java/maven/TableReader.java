@@ -1,14 +1,22 @@
 package maven;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-//uses connection and table name to get data from table
+//uses connection and table name to get all data from table
 public class TableReader {
-    public static void readTable(Connection connection, String tableName) {
+    PreparedStatement pstat = null;
+    private Connection connection;
+    private String id;
+    
+    //uses connection and table name to get all data from table
+    public static String[] readTable(Connection connection, String tableName) {
+        String[] fullTable = new String[100];
+        int index = 0;
         try {
             //connect
             Statement statement = connection.createStatement();
@@ -24,8 +32,10 @@ public class TableReader {
                     String columnName = metaData.getColumnName(i);
                     String columnValue = resultSet.getString(i);
                     System.out.println(columnName + ": " + columnValue);
+
+                    fullTable[index] = columnName + ": " + columnValue;
+                    index++;
                 }
-                System.out.println(); // Separate rows
             }
 
             resultSet.close();
@@ -33,7 +43,27 @@ public class TableReader {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return fullTable;
         
     }
+
+    public String[] getRowByID(Connection connection, String id) {
+        this.connection = connection;
+        this.id = id;
+        try {
+            pstat = connection.prepareStatement("SELECT * FROM your_table_name WHERE id = " + id);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+        
+    }
+
+
+
+
+
 
 }

@@ -10,19 +10,31 @@ public static void main(String[] args) throws SQLException {
     Connection connection = DatabaseConnection.getConnection();
 
     // Call the readTable function from TableReader class
-    TableReader.readTable(connection, "customer");
+    String[] text = TableReader.readTable(connection, "customer");
+    System.out.println(text[1]);
+    System.out.println();
+    System.out.println();
+    System.out.println();
+    System.out.println();
+    System.out.println(text[3]);
     
-
-    //
-    JFrame f=new JFrame();//creating instance of JFrame  
-            
+     
+    JFrame f=new JFrame();//creating instance of JFrame 
+ 
+    /*        
     JButton b=new JButton("click");//creating instance of JButton  
     b.setBounds(130,100,100, 40);//x axis, y axis, width, height  
             
     f.add(b);//adding button in JFrame  
             
-    f.setSize(600,500);//400 width and 500 height  
-    f.setLayout(null);//using no layout managers  
-    f.setVisible(true);//making the frame visible  
-}  
+    
+    */
+    //text  
+    JTextArea area=new JTextArea(text[3]);  
+    area.setBounds(10,30, 1000,600);  
+    f.add(area);  
+    f.setSize(1280,720);  
+    f.setLayout(null);  
+    f.setVisible(true);
+}
 }  
