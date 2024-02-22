@@ -12,6 +12,8 @@ public static void main(String[] args) throws SQLException {
     // Call the readTable function from TableReader class
     TableReader.readTable(connection, "customer");
     
+
+    //
     JFrame f=new JFrame();//creating instance of JFrame  
             
     JButton b=new JButton("click");//creating instance of JButton  
